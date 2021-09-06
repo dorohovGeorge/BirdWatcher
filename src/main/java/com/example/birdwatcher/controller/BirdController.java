@@ -1,8 +1,7 @@
 package com.example.birdwatcher.controller;
 
-import com.example.birdwatcher.general.Bird;
+import com.example.birdwatcher.model.Bird;
 import com.example.birdwatcher.service.BirdService;
-import com.example.birdwatcher.service.NestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +51,7 @@ public class BirdController {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
-        boolean status = birdService.save(bird, id_nest);
-        if (!status) {
-            LOG.info("This bird already exist in nest with id: {}", id_nest);
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-        }
+        birdService.save(bird, id_nest);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/bird/{id}").buildAndExpand(bird.getId()).toUri());

@@ -1,6 +1,6 @@
 package com.example.birdwatcher.controller;
 
-import com.example.birdwatcher.general.Nest;
+import com.example.birdwatcher.model.Nest;
 import com.example.birdwatcher.service.NestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class NestController {
     public ResponseEntity<List<Nest>> getAll() {
         LOG.info("Getting all nests");
         List<Nest> nests = nestService.getAllNest();
-        if (nests != null || nests.isEmpty()) {
+        if (nests == null || nests.isEmpty()) {
             return new ResponseEntity<List<Nest>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Nest>>(nests, HttpStatus.OK);

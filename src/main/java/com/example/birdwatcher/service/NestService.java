@@ -1,6 +1,6 @@
 package com.example.birdwatcher.service;
 
-import com.example.birdwatcher.general.Nest;
+import com.example.birdwatcher.model.Nest;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.birdwatcher.service.impl;
 
-import com.example.birdwatcher.general.Bird;
-import com.example.birdwatcher.general.Nest;
+import com.example.birdwatcher.model.Bird;
+import com.example.birdwatcher.model.Nest;
 import com.example.birdwatcher.repository.NestRepo;
 import com.example.birdwatcher.service.BirdService;
 import com.example.birdwatcher.service.NestService;
@@ -20,21 +20,25 @@ public class NestServiceImpl implements NestService {
     NestRepo nestRepo;
 
     @Override
+    @Transactional
     public List<Nest> getAllNest() {
         return nestRepo.findAll();
     }
 
     @Override
+    @Transactional
     public Nest getById(long id) {
         return nestRepo.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional
     public void save(Nest nest) {
         nestRepo.save(nest);
     }
 
     @Override
+    @Transactional
     public void update(Nest nest) {
         Nest nestToUpdate = nestRepo.getById(nest.getId());
         nestToUpdate.setName(nest.getName());
@@ -43,6 +47,7 @@ public class NestServiceImpl implements NestService {
     }
 
     @Override
+    @Transactional
     public void delete(Nest nest) {
         nestRepo.delete(nest);
     }

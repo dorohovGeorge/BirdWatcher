@@ -1,6 +1,7 @@
-package com.example.birdwatcher.general;
+package com.example.birdwatcher.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Bird {
@@ -18,6 +19,12 @@ public class Bird {
 
     public Bird(Long id, String name, String color, boolean isFlyingBird) {
         this.id = id;
+        this.name = name;
+        this.color = color;
+        this.isFlyingBird = isFlyingBird;
+    }
+
+    public Bird(String name, String color, boolean isFlyingBird) {
         this.name = name;
         this.color = color;
         this.isFlyingBird = isFlyingBird;
@@ -51,21 +58,33 @@ public class Bird {
         this.color = color;
     }
 
-    public boolean isFlyingBird() {
+    public boolean getIsFlyingBird() {
         return isFlyingBird;
     }
 
-    public void setFlyingBird(boolean flyingBird) {
+    public void setIsFlyingBird(boolean flyingBird) {
         isFlyingBird = flyingBird;
     }
 
     @Override
     public String toString() {
         return "Bird{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", color='" + color + '\'' +
                 ", isFlyingBird=" + isFlyingBird +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bird bird = (Bird) o;
+        return isFlyingBird == bird.isFlyingBird && Objects.equals(name, bird.name) && Objects.equals(color, bird.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, color, isFlyingBird);
     }
 }

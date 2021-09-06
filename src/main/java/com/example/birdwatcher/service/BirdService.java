@@ -1,7 +1,7 @@
 package com.example.birdwatcher.service;
 
 
-import com.example.birdwatcher.general.Bird;
+import com.example.birdwatcher.model.Bird;
 
 import java.util.List;
 

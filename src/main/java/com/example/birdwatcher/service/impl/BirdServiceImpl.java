@@ -1,12 +1,14 @@
 package com.example.birdwatcher.service.impl;
 
-import com.example.birdwatcher.general.Bird;
-import com.example.birdwatcher.general.Nest;
+import com.example.birdwatcher.model.Bird;
+import com.example.birdwatcher.model.Nest;
+import com.example.birdwatcher.model.exception.BirdIsAlreadyAssignedException;
 import com.example.birdwatcher.repository.BirdRepo;
 import com.example.birdwatcher.service.BirdService;
 import com.example.birdwatcher.service.NestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,10 +33,11 @@ public class BirdServiceImpl implements BirdService {
     }
 
     @Override
+    @Transactional
     public boolean save(Bird bird, long idNest) {
         Nest nest = nestService.getById(idNest);
         if (nest.isExistBird(bird)) {
-            return false;
+            throw new BirdIsAlreadyAssignedException(bird, idNest);
         }
         List<Bird> currentListOfBirds = nest.getBirds();
         currentListOfBirds.add(bird);
@@ -44,15 +47,17 @@ public class BirdServiceImpl implements BirdService {
     }
 
     @Override
+    @Transactional
     public void update(Bird bird) {
         Bird birdToUpdate = birdRepo.getById(bird.getId());
         birdToUpdate.setName(bird.getName());
-        birdToUpdate.setFlyingBird(bird.isFlyingBird());
+        birdToUpdate.setIsFlyingBird(bird.getIsFlyingBird());
         birdToUpdate.setColor(bird.getColor());
         birdRepo.save(birdToUpdate);
     }
 
     @Override
+    @Transactional
     public void delete(Bird bird) {
         birdRepo.delete(bird);
     }
