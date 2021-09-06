@@ -12,7 +12,7 @@ public interface BirdService {
 
     boolean save(Bird bird, long idNest);
 
-    void update(Bird bird);
+    void update(Bird bird, long id);
 
     void delete(Bird bird);
 

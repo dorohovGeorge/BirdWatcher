@@ -1,16 +1,13 @@
 package com.example.birdwatcher.service;
 
 import com.example.birdwatcher.model.Bird;
-import com.example.birdwatcher.model.Nest;
-import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,10 +48,11 @@ public class BirdServiceTest {
         bird = birdService.getAllBird().stream().filter(bird1 -> bird1.equals(finalBird)).findFirst().get();
         bird.setName("Popka");
 
-        birdService.update(bird);
+        birdService.update(bird, bird.getId());
 
         assertThat(birdService.getById(bird.getId()).getName()).isEqualTo("Popka");
     }
+
     @Test
     public void delete() {
         Bird bird = new Bird("Hawk", "Brown", true);

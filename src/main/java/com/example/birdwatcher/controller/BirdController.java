@@ -58,13 +58,14 @@ public class BirdController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @PutMapping()
-    public ResponseEntity<Bird> update(@RequestBody Bird bird) {
-        LOG.info("Updating bird with id: {}", bird.getId());
-        if (birdService.getById(bird.getId()) == null) {
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Bird> update(@RequestBody Bird bird, @PathVariable("id") long id) {
+        LOG.info("Updating bird with id: {}", id);
+        if (birdService.getById(id) == null) {
             return new ResponseEntity<Bird>(HttpStatus.NOT_FOUND);
         }
-        birdService.update(bird);
+        birdService.update(bird, id);
+        bird.setId(id);
         return new ResponseEntity<Bird>(bird, HttpStatus.OK);
     }
 

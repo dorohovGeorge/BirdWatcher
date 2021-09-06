@@ -48,8 +48,8 @@ public class BirdServiceImpl implements BirdService {
 
     @Override
     @Transactional
-    public void update(Bird bird) {
-        Bird birdToUpdate = birdRepo.getById(bird.getId());
+    public void update(Bird bird, long id) {
+        Bird birdToUpdate = birdRepo.getById(id);
         birdToUpdate.setName(bird.getName());
         birdToUpdate.setIsFlyingBird(bird.getIsFlyingBird());
         birdToUpdate.setColor(bird.getColor());

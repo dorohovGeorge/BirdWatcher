@@ -1,0 +1,63 @@
+###получение всех птиц
+GET http://localhost:8080/birds
+
+###получение птицы по id
+GET http://localhost:8080/birds/1
+
+###добавление птицы в гнездо с id = 1
+POST http://localhost:8080/birds/1
+Content-Type: application/json
+
+{
+  "name": "Crow",
+  "isFlyingBird": true,
+  "color": "Brown"
+}
+
+###изменение информации о птице c id=3
+PUT http://localhost:8080/birds/3
+Content-Type: application/json
+
+{
+  "name": "Hawk",
+  "isFlyingBird": true,
+  "color": "Brown"
+}
+
+###удаление птицы
+DELETE http://localhost:8080/birds/3
+
+###получение информации всех о всех гнездах и птицах в них
+GET http://localhost:8080/nests
+
+###получение гнезда по id
+GET http://localhost:8080/nests/1
+
+###создание гнезда
+POST http://localhost:8080/nests
+Content-Type: application/json
+
+{
+  "address": "Middle-Earth",
+  "name": "Erebor"
+}
+
+###изменение гнезда с id=2
+PUT http://localhost:8080/nests/2
+Content-Type: application/json
+
+{
+  "address": "Middle-Earth",
+  "name": "Moria",
+  "birds": [
+    {
+      "name": "Eagle",
+      "color": "Brown",
+      "isFlyingBird": true
+    }
+  ]
+}
+
+
+###удаление гнезда с id=2
+DELETE http://localhost:8080/nests/2

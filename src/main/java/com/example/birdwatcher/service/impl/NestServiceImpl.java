@@ -43,6 +43,7 @@ public class NestServiceImpl implements NestService {
         Nest nestToUpdate = nestRepo.getById(nest.getId());
         nestToUpdate.setName(nest.getName());
         nestToUpdate.setAddress(nest.getAddress());
+        nestToUpdate.setBirds(nest.getBirds());
         nestRepo.save(nestToUpdate);
     }
 
@@ -53,7 +54,7 @@ public class NestServiceImpl implements NestService {
     }
 
     @Transactional
-    public Nest addBirdToNest(Long nestId, Long birdId){
+    public Nest addBirdToNest(Long nestId, Long birdId) {
         Nest nest = getById(nestId);
         Bird bird = birdService.getById(birdId);
         nest.addBird(bird);
@@ -61,7 +62,7 @@ public class NestServiceImpl implements NestService {
     }
 
     @Transactional
-    public Nest removeBirdFromNest(Long nestId, Long birdId){
+    public Nest removeBirdFromNest(Long nestId, Long birdId) {
         Nest nest = getById(nestId);
         Bird bird = birdService.getById(birdId);
         nest.removeBird(bird);

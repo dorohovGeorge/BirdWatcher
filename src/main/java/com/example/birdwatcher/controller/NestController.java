@@ -47,6 +47,7 @@ public class NestController {
         if (nestService.getById(id) == null) {
             return new ResponseEntity<Nest>(HttpStatus.NOT_FOUND);
         }
+        nest.setId(id);
         nestService.update(nest);
         return new ResponseEntity<Nest>(nest, HttpStatus.OK);
     }
